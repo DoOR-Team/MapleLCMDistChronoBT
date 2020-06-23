@@ -1,4 +1,4 @@
-/**************************************************************************************[IntTypes.h]
+/****************************************************************************************[XAlloc.h]
 Copyright (c) 2009-2010, Niklas Sorensson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -17,26 +17,30 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************/
 
-#ifndef Minisat_IntTypes_h
-#define Minisat_IntTypes_h
 
-#ifdef __sun
-    // Not sure if there are newer versions that support C99 headers. The
-    // needed features are implemented in the headers below though:
+#ifndef Minisat_XAlloc_h
+#define Minisat_XAlloc_h
 
-#   include <sys/int_types.h>
-#   include <sys/int_fmtio.h>
-#   include <sys/int_limits.h>
+#include <errno.h>
+#include <stdlib.h>
 
-#else
-
-#   include <stdint.h>
-#   include <inttypes.h>
-
-#endif
-
-#include <limits.h>
+namespace Minisat {
 
 //=================================================================================================
+// Simple layer on top of malloc/realloc to catch out-of-memory situtaions and provide some typing:
+
+class OutOfMemoryException {
+};
+
+static inline void *xrealloc(void *ptr, size_t size) {
+  void *mem = realloc(ptr, size);
+  if (mem == NULL && errno == ENOMEM) {
+    throw OutOfMemoryException();
+  } else
+    return mem;
+}
+
+//=================================================================================================
+}
 
 #endif
