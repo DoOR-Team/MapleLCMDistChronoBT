@@ -21,8 +21,8 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #define Minisat_IntTypes_h
 
 #ifdef __sun
-// Not sure if there are newer versions that support C99 headers. The
-// needed features are implemented in the headers below though:
+    // Not sure if there are newer versions that support C99 headers. The
+    // needed features are implemented in the headers below though:
 
 #   include <sys/int_types.h>
 #   include <sys/int_fmtio.h>
@@ -31,16 +31,12 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #else
 
 #   include <stdint.h>
-#   include "IntTypes.h"
-
+#   include <inttypes.h>
 
 #endif
 
 #include <limits.h>
 
-#  define __PRI64_PREFIX    "l"
-#define PRIi64     __PRI64_PREFIX "i"
-#define PRIu64     __PRI64_PREFIX "u"
 //=================================================================================================
 
 #endif
