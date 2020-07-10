@@ -112,7 +112,7 @@ int main(int argc, char **argv) {
     char file[200];
     uint64_t total_restart, total_conflicts, total_decisions, total_propagations;
 
-    total_restart = total_conflicts = total_decisions = total_propagations  = 0;
+    total_restart = total_conflicts = total_decisions = total_propagations = 0;
 
     for (int i = 1; i <= 1; i++) {
       SimpSolver S;
@@ -288,7 +288,8 @@ int main(int argc, char **argv) {
     printf("c restarts              : %" PRIu64"\n", total_restart);
     printf("c conflicts             : %-12" PRIu64"   (%.0f /sec)\n", total_conflicts, total_conflicts / cpu_time);
     printf("c decisions             : %-12" PRIu64"   (%.0f /sec)\n", total_decisions, total_decisions / cpu_time);
-    printf("c propagations          : %-12" PRIu64"   (%.0f /sec)\n", total_propagations, total_propagations / cpu_time);
+    printf("c propagations          : %-12" PRIu64"   (%.0f /sec)\n", total_propagations,
+           total_propagations / cpu_time);
     printf("c CPU time              : %g s\n", cpu_time);
 
   } catch (OutOfMemoryException &) {
