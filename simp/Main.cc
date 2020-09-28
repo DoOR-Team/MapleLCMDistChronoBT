@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 {
     try {
         setUsageHelp("USAGE: %s [options] <input-file> <result-output-file>\n\n  where input may be either in plain or gzipped DIMACS.\n");
-        printf("c This is MapleLCMDistChronoBT-DL.\n");
+//        printf("c This is MapleLCMDistChronoBT-DL.\n");
         
 #if defined(__linux__)
         fpu_control_t oldcw, newcw;
@@ -95,7 +95,7 @@ int main(int argc, char** argv)
 #endif
         // Extra options:
         //
-        IntOption    verb   ("MAIN", "verb",   "Verbosity level (0=silent, 1=some, 2=more).", 1, IntRange(0, 2));
+        IntOption    verb   ("MAIN", "verb",   "Verbosity level (0=silent, 1=some, 2=more).", 0, IntRange(0, 2));
         BoolOption   pre    ("MAIN", "pre",    "Completely turn on/off any preprocessing.", true);
         StringOption dimacs ("MAIN", "dimacs", "If given, stop after preprocessing and write the result to this file.");
         IntOption    cpu_lim("MAIN", "cpu-lim","Limit on CPU time allowed in seconds.\n", INT32_MAX, IntRange(0, INT32_MAX));
@@ -190,7 +190,7 @@ int main(int argc, char** argv)
                 printf("c Solved by simplification\n");
                 printStats(S);
                 printf("\n"); }
-            printf("s UNSATISFIABLE\n");
+            printf("unsat\n");
             if (S.drup_file){
 #ifdef BIN_DRUP
                 fputc('a', S.drup_file); fputc(0, S.drup_file);
@@ -217,7 +217,7 @@ int main(int argc, char** argv)
         if (S.verbosity > 0){
             printStats(S);
             printf("\n"); }
-        printf(ret == l_True ? "s SATISFIABLE\n" : ret == l_False ? "s UNSATISFIABLE\n" : "s UNKNOWN\n");
+        printf(ret == l_True ? "sat\n" : ret == l_False ? "unsat\n" : "s UNKNOWN\n");
         if (ret == l_True){
             printf("v ");
             for (int i = 0; i < S.nVars(); i++)
