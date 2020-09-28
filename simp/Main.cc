@@ -219,13 +219,13 @@ int main(int argc, char** argv)
             printf("\n"); }
         printf(ret == l_True ? "sat\n" : ret == l_False ? "unsat\n" : "s UNKNOWN\n");
         if (ret == l_True){
-            printf("v ");
-            for (int i = 0; i < S.nVars(); i++)
-                if (S.model[i] != l_Undef)
-                    printf("%s%s%d", (i==0)?"":" ", (S.model[i]==l_True)?"":"-", i+1);
-            printf(" 0\n");
+//            printf("v ");
+//            for (int i = 0; i < S.nVars(); i++)
+//                if (S.model[i] != l_Undef)
+//                    printf("%s%s%d", (i==0)?"":" ", (S.model[i]==l_True)?"":"-", i+1);
+//            printf(" 0\n");
         }
-
+        return 0;
 
         if (S.drup_file && ret == l_False){
 #ifdef BIN_DRUP
